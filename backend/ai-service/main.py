@@ -5,9 +5,11 @@ import google.generativeai as genai
 
 app = FastAPI(title="MedAxis AI Service")
 
-# Configure Google Gemini API
-API_KEY = os.getenv("GEMINI_API_KEY", "***REMOVED***")
-genai.configure(api_key=API_KEY)
+# Configure Google Gemini API via environment variable
+API_KEY = os.getenv("GEMINI_API_KEY")
+if API_KEY:
+    genai.configure(api_key=API_KEY)
+
 model = genai.GenerativeModel('gemini-1.5-flash')
 
 class QueryRequest(BaseModel):
